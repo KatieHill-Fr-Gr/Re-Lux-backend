@@ -23,13 +23,13 @@ by Katie Hill & Tony Rodriguez
 
 - **Duration** 7 days
 - **Team** Joint project with Tony Rodriguez (TonyRod116 on GitHub)
-- **Contributions** Backend development in Express/Node.js, JWT token authentication, custom error-handling
+- **Contributions** Backend development in Express/Node.js, RESTful API design & implementation, third-party service integration (MongoDB, Stripe), and custom middleware implementation for authentication & error-handling
 
 ## About
 
 Re-Lux is a marketplace app where users can sell luxury goods, including designer clothing and high-end tech. It works in a similar way to apps like Vinted and Vestiaire Collective in that users can either make an offer on an item or add the item straight to their bag and proceed to checkout. The app also allows users to rate and review sellers, favourite items, and accept/reject offers on items they are selling. 
 
-This was an ambitious joint project with my colleague Tony Rodriguez on the General Assembly Software Engineering Bootcamp. It involved building a dynamic resale platform in React with a complex frontend architecture and multiple interconnected features. Overall, our approach worked well and we were able to deliver a fully functional app with no bugs. However, we faced a number of challenges during the build due to the complexity of the app.
+For this joint project on our General Assembly Software Engineering Bootcamp, Tony Rodriguez and I worked together via Zoom to design and build a RESTful API that was capable of handling the complex functionality of a resale platform.  We then each took ownership of different features of the app and implemented additional routes and schemas accordingly. 
 
 The API can be accessed here: https://re-lux-marketplace-api.netlify.app/
 
@@ -111,6 +111,9 @@ Finally, I created a Trello board and added the reference materials, user storie
 <img width="1426" height="760" alt="Re-Lux_TrelloBoard" src="https://github.com/user-attachments/assets/7a91dae9-f281-4c3a-bb68-8dca80824cb5" />
 
 
+## Build
+
+We developed the initial routes, Mongoose schemas, user authentication, and error-handling together.
 
 
 
