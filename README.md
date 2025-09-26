@@ -29,7 +29,7 @@ by Katie Hill & Tony Rodriguez
 
 Re-Lux is a marketplace app where users can sell luxury goods, including designer clothing and high-end tech. It works in a similar way to apps like Vinted and Vestiaire Collective in that users can either make an offer on an item or add the item straight to their bag and proceed to checkout. The app also allows users to rate and review sellers, favourite items, and accept/reject offers on items they are selling. 
 
-For this joint project on our General Assembly Software Engineering Bootcamp, Tony Rodriguez and I worked together via Zoom to design and build a RESTful API that was capable of handling the complex functionality of a resale platform.  We then each took ownership of different features of the app and implemented additional routes and schemas accordingly. 
+For this joint project on our General Assembly Software Engineering Bootcamp, Tony Rodriguez and I worked together via Zoom to design and build a RESTful API that was capable of handling the complex functionality of a resale platform. We each took ownership of different features of the app and implemented additional routes and schemas which presented several challenges during the build. Overall, we managed to deliver a robust and secure API by the project deadline. 
 
 The API can be accessed here: https://re-lux-marketplace-api.netlify.app/
 
@@ -63,12 +63,6 @@ For environment variables:
 npm install dotenv
 ```
 
-For error-handling:
-
-```bash
-npm install morgan
-```
-
 For the payment gateway:
 
 ```bash
@@ -79,6 +73,7 @@ For HTTP requests:
 
 ```bash
 npm install cors
+npm install morgan
 npm install serverless-http
 ```
 
@@ -106,14 +101,70 @@ We also decided on the basic Mongoose schemas we would use and mapped the relati
 
 #### 3) Project Management
 
-Finally, I created a Trello board and added the reference materials, user stories, tasks to be completed throughout the week, and our stretch goals for the future: 
+Finally, I created a Trello board and added the reference materials, user stories, tasks to be completed throughout the week, and our stretch goals: 
 
 <img width="1426" height="760" alt="Re-Lux_TrelloBoard" src="https://github.com/user-attachments/assets/7a91dae9-f281-4c3a-bb68-8dca80824cb5" />
 
 
 ## Build
 
-We developed the initial routes, Mongoose schemas, user authentication, and error-handling together.
+We developed the initial routes, Mongoose schemas (User and Item), user authentication, and custom error-handling together. 
+
+#### 1) User Authentication
+
+Following best practices, we implemented user authentication first before building the CRUD operations:
+
+- Created the /auth routes
+- Developed the User model
+- Implemented JWT-based authentication
+- Added custom verifyToken middleware to check for a valid token
+
+<img width="630" height="455" alt="Re-Lux_verifyToken" src="https://github.com/user-attachments/assets/fb875612-9275-4b9f-bf41-69e52875d528" />
+
+
+#### 2) Item Listings
+
+We implemented full CRUD operations for the items listings: 
+
+- Index (basic list view)
+- Show (detail view)
+- Create (new item form)
+- Update (edit item form)
+- Delete
+
+
+#### 3) Custom error-handling
+
+To provide comprehensive error-handling, we created a helper file errors.js using JavaScript classes and an errorHandler middleware to handle server errors:
+
+
+
+
+
+
+#### 4) Stripe Integration 
+
+
+
+
+
+
+### Challenges
+
+
+## Wins
+
+
+## Bugs
+
+
+## Key Learnings
+
+
+## Future Improvements
+
+
+
 
 
 
