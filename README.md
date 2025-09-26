@@ -23,7 +23,7 @@ by Katie Hill & Tony Rodriguez
 
 - **Duration** 7 days
 - **Team** Joint project with Tony Rodriguez (TonyRod116 on GitHub)
-- **Contributions** Backend development 
+- **Contributions** Backend development in Express/Node.js, JWT token authentication, custom error-handling
 
 ## About
 
@@ -49,4 +49,69 @@ Our brief was to build a MongoDB/Express/React/Node.js application with full CRU
 ## Installation
 
 For the backend, clone this repository and install the following packages:
+
+For user authentication: 
+
+```bash
+npm install bcrypt
+npm install jsonwebtoken
+```
+
+For environment variables:
+
+```bash
+npm install dotenv
+```
+
+For error-handling:
+
+```bash
+npm install morgan
+```
+
+For the payment gateway:
+
+```bash
+npm install stripe
+```
+
+For HTTP requests: 
+
+```bash
+npm install cors
+npm install serverless-http
+```
+
+
+## Planning 
+
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-plain-wordmark.svg" 
+	alt="Trello" width="80" height="60" />
+
+
+#### 1) Routing
+
+We started by identifying all the endpoints for the user pages and also the items or products for sale:
+
+<img width="1008" height="496" alt="Re-Lux_RoutingTables" src="https://github.com/user-attachments/assets/9dedd657-d646-49ee-aeae-432d3c474f21" />
+
+
+#### 2) Data Relationships
+
+We also decided on the basic Mongoose schemas we would use and mapped the relationships using dbdiagram.io: 
+
+
+<img width="807" height="752" alt="Re-Lux_ERD" src="https://github.com/user-attachments/assets/7fbaae21-f1d2-4f66-a6cc-91934eac6376" />
+
+
+#### 3) Project Management
+
+Finally, I created a Trello board and added the reference materials, user stories, tasks to be completed throughout the week, and our stretch goals for the future: 
+
+<img width="1426" height="760" alt="Re-Lux_TrelloBoard" src="https://github.com/user-attachments/assets/7a91dae9-f281-4c3a-bb68-8dca80824cb5" />
+
+
+
+
+
 
