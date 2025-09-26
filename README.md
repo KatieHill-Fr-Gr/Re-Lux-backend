@@ -133,20 +133,27 @@ We implemented full CRUD operations for the items listings:
 - Delete
 
 
-#### 3) Custom error-handling
+#### 3) Error Handling
 
-To provide comprehensive error-handling, we created a helper file errors.js using JavaScript classes and an errorHandler middleware to handle server errors:
-
-
+To provide comprehensive error handling, we created a helper file errors.js using JavaScript classes and an errorHandler middleware to manage server errors:
 
 
+<img width="646" height="480" alt="Re-Lux_errorhandling" src="https://github.com/user-attachments/assets/b2df3daf-7140-4583-aba3-dcc8574b5aa5" />
 
 
 #### 4) Stripe Integration 
 
+I took ownership of the payment gateway and implemented this on both the frontend and backend: 
+
+- Added the STRIPE_SECRET_KEY to the .env file
+- Created a /purchase-intent route 
+- Calculated the order total server-side (in addition to frontend calculation) for security
+- Created the paymentIntent which is then sent to Stripe for processing
+
+<img width="606" height="256" alt="Re-Lux_StripeTotalCalculation" src="https://github.com/user-attachments/assets/a76c60b4-0f89-41c5-90ec-541ebd615b4b" />
 
 
-
+<img width="637" height="158" alt="Re-Lux_StripePaymentIntent" src="https://github.com/user-attachments/assets/9c424922-6f29-4a40-aa9a-7423a28180b0" />
 
 
 ### Challenges
