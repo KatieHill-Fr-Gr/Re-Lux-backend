@@ -1,7 +1,7 @@
 # Re-Lux - A marketplace app with a sleek UI/UX design
 by Katie Hill & Tony Rodriguez
 
-![Re-Lux Homepage](src/assets/deployed.png)
+<img width="1428" height="1344" alt="Re-Lux_deployedhomepage" src="https://github.com/user-attachments/assets/da5f3544-33c2-4df9-a92f-daeba05d6bc4" />
 
 *Screenshot of dynamic homepage displaying the latest listings*
 
@@ -23,7 +23,7 @@ by Katie Hill & Tony Rodriguez
 
 - **Duration** 7 days
 - **Team** Joint project with Tony Rodriguez (TonyRod116 on GitHub)
-- **Contributions** React frontend development with full CRUD operations for items, image uploads, checkout flow with Stripe integration, and UI/UX design
+- **Contributions** Backend development 
 
 ## About
 
@@ -31,4 +31,22 @@ Re-Lux is a marketplace app where users can sell luxury goods, including designe
 
 This was an ambitious joint project with my colleague Tony Rodriguez on the General Assembly Software Engineering Bootcamp. It involved building a dynamic resale platform in React with a complex frontend architecture and multiple interconnected features. Overall, our approach worked well and we were able to deliver a fully functional app with no bugs. However, we faced a number of challenges during the build due to the complexity of the app.
 
-You can view the live app here: https://re-lux-marketplace.netlify.app/
+The API can be accessed here: https://re-lux-marketplace-api.netlify.app/
+
+### Brief
+
+
+Our brief was to build a MongoDB/Express/React/Node.js application with full CRUD that met the following criteria: 
+
+- Backend built with Express.js and Node.js
+- MongoDB used as a database management system
+- JWT token-based authentication to sign up, sign in, and sign out users
+- Authorization implemented across frontend and backend to esnure guest users are not able to create, update, or delete data
+- At least two data entities in addition to the User model (one must have a relationship with the User model)
+- Full CRUD functionality
+- Public APIs that require secret keys must be access from the backend only
+
+## Installation
+
+For the backend, clone this repository and install the following packages:
+
