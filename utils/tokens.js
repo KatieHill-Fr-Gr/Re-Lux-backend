@@ -12,8 +12,8 @@ export const generateToken = (user) => {
         profilePic: user.profilePic,
         avatar: user.avatar
       }
-    }, // 1st arg: payload
-    process.env.TOKEN_SECRET, // 2nd arg: Secret
-    { expiresIn: '2d' } // 3rd arg: options object
+    }, 
+    process.env.TOKEN_SECRET,
+    { expiresIn: '2d' }
   )
 }

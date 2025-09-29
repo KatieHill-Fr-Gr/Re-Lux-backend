@@ -6,8 +6,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 // Stripe route
 router.post('/purchase-intent', async (req, res, next) => {
-    console.log('Route hit!');
-    console.log('Request body:', req.body);
 
     const { amount, cartItems, currency = 'eur' } = req.body;
 
