@@ -159,20 +159,54 @@ I took ownership of the payment gateway and implemented this on both the fronten
 
 ### Challenges
 
+#### 1) Item Types
+
+When working on the category pages on the frontend, I realised that I needed to manage the product types from the backend. I defined the types directly in the Mongoose schema using an `enum`: 
+
+
+To populate the dropdown lists in the create and edit form components, I implemented a separate `/types` route that uses enumValues to dynamically retrieve the list of types from the schema: 
+
+This solution meant there was no need to hardcode the types on the frontend and ensured consistency across the app. 
+
+
+#### 2) Payment Integration
+
+
+
 
 ## Wins
+
+- JWT authentication for access control/user management
+- Advanced error handling using custom classes & middleware
+- Secure and maintainable Stripe integration 
+
+These features were all built with reusability in mind, which means they can be adapted for future projects, too. 
+
+## Key Learnings
+
+Overall, this project was a great opportunity to learn more about data modelling and relationships, including: 
+
+- How to structure a database with multiple entities
+- How to use `populate` in MongoDB
+- When and where to use references or embedded data
+
+It also gave me a solid understanding of RESTful API design, including how to structure and implement routes as well as how to implement JWT-based authentication for secure API access. By integrating Stripe, I also learned how to handle secure payments and currency on the backend, including server-side validation of payment amounts. 
+
+It was a pleasure working with Tony on both the frontend and backend. By building the API together and then working on separate features, we were able to optimise our productivity and deliver all the functionalities we had planned without any conflicts.
 
 
 ## Bugs
 
-
-## Key Learnings
+There are no known bugs on the backend. The API is working as expected. 
 
 
 ## Future Improvements
 
-
-
+- Public user profiles displaying ratings and reviews
+- Search & filter options (API endpoints, sorting options)
+- Social features (messaging API, follow/unfollow endpoints)
+- Real-time user notifications (backend events or WebSocket support)
+- Inventory management (removing sold items from available listings)
 
 
 
