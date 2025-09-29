@@ -29,7 +29,7 @@ by Katie Hill & Tony Rodriguez
 
 Re-Lux is a marketplace app where users can sell luxury goods, including designer clothing and high-end tech. It works in a similar way to apps like Vinted and Vestiaire Collective in that users can either make an offer on an item or add the item straight to their bag and proceed to checkout. The app also allows users to rate and review sellers, favourite items, and accept/reject offers on items they are selling. 
 
-For this joint project on our General Assembly Software Engineering Bootcamp, Tony Rodriguez and I worked together via Zoom to design and build a RESTful API that was capable of handling the complex functionality of a resale platform. We each took ownership of different features of the app and implemented additional routes and schemas which presented several challenges during the build. Overall, we managed to deliver a robust and secure API by the project deadline. 
+This was a joint project with Tony Rodriguez on the General Assembly Software Engineering Bootcamp. We worked together via Zoom to design and build a RESTful API to support the complex functionality of a resale platform. We each took ownership of different features of the app and implemented additional routes and schemas which presented several challenges during the build. Overall, we managed to deliver a robust and secure API by the project deadline. 
 
 The API can be accessed here: https://re-lux-marketplace-api.netlify.app/
 
@@ -108,7 +108,7 @@ Finally, I created a Trello board and added the reference materials, user storie
 
 ## Build
 
-We developed the initial routes, Mongoose schemas (User and Item), user authentication, and custom error-handling together. 
+Tony and I initially developed the API together, including the basic routes, Mongoose schemas (User and Item), user authentication, and custom error-handling: 
 
 #### 1) User Authentication
 
@@ -117,14 +117,15 @@ Following best practices, we implemented user authentication first before buildi
 - Created the /auth routes
 - Developed the User model
 - Implemented JWT-based authentication
-- Added custom verifyToken middleware to check for a valid token
+- Added custom verifyToken middleware to protect authenticated routes
+- Stored secret keys securely in the .env file
 
 <img width="630" height="455" alt="Re-Lux_verifyToken" src="https://github.com/user-attachments/assets/fb875612-9275-4b9f-bf41-69e52875d528" />
 
 
 #### 2) Item Listings
 
-We implemented full CRUD operations for the items listings: 
+We then implemented full CRUD operations for the items listings: 
 
 - Index (basic list view)
 - Show (detail view)
@@ -135,7 +136,7 @@ We implemented full CRUD operations for the items listings:
 
 #### 3) Error Handling
 
-To provide comprehensive error handling, we created a helper file errors.js using JavaScript classes and an errorHandler middleware to manage server errors:
+To standardise error handling, we created a helper file with custom error classes (using JavaScript’s built-in Error class) and an errorHandler middleware function to manage server errors:
 
 
 <img width="646" height="480" alt="Re-Lux_errorhandling" src="https://github.com/user-attachments/assets/b2df3daf-7140-4583-aba3-dcc8574b5aa5" />
