@@ -163,15 +163,13 @@ I took ownership of the payment gateway and implemented this on both the fronten
 
 When working on the category pages on the frontend, I realised that I needed to manage the product types from the backend. I defined the types directly in the Mongoose schema using an `enum`: 
 
+<img width="641" height="365" alt="Re-Lux_itemtypes" src="https://github.com/user-attachments/assets/ae8fbae1-891c-46ce-97c5-35b23e2c6a7b" />
 
 To populate the dropdown lists in the create and edit form components, I implemented a separate `/types` route that uses enumValues to dynamically retrieve the list of types from the schema: 
 
+<img width="639" height="203" alt="Re-Lux_itemtypesroute" src="https://github.com/user-attachments/assets/1807a0b5-6a76-423f-8610-36b5ec319c91" />
+
 This solution meant there was no need to hardcode the types on the frontend and ensured consistency across the app. 
-
-
-#### 2) Payment Integration
-
-
 
 
 ## Wins
