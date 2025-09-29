@@ -1,398 +1,178 @@
-# Re-Lux Backend
+# Re-Lux - A marketplace app with a sleek UI/UX design
+by Katie Hill & Tony Rodriguez
 
-## Description
+<img width="1428" height="1344" alt="Re-Lux_deployedhomepage" src="https://github.com/user-attachments/assets/da5f3544-33c2-4df9-a92f-daeba05d6bc4" />
 
-This is the backend API for Re-Lux, a luxury fashion marketplace platform built during my software engineering course. The project focuses on creating a robust REST API that handles user authentication, item management, reviews, and favorites functionality. This backend serves as the foundation for a full-stack application where users can buy, sell, and trade luxury fashion items.
+*Screenshot of dynamic homepage displaying the latest listings*
 
-## Deployment Link
 
-The backend is deployed on Netlify and can be accessed at: [https://re-lux-backend.netlify.app/](https://re-lux-backend.netlify.app/)
+## Tech stack
 
-The API is currently running and responding with the message: `{"message":"server home route is running🚀"}`
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original-wordmark.svg"
+  alt=“React” width="40" height="40" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongoose/mongoose-original-wordmark.svg"
+  alt="Mongoose" width="40" height="40"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg"
+  alt="Express" width="40" height="40"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg"
+  alt="Node js" width="40" height="40"/>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-plain-wordmark.svg"
+  alt="MongoDB" width="40" height="40"/>
 
-## Getting Started/Code Installation
+## Timeframe
 
-To run this project locally, follow these steps:
+- **Duration** 7 days
+- **Team** Joint project with Tony Rodriguez (TonyRod116 on GitHub)
+- **Contributions** Backend development in Express/Node.js, RESTful API design & implementation, third-party service integration (MongoDB, Stripe), and custom middleware implementation for authentication & error-handling
 
-1. Clone the repository:
+## About
+
+Re-Lux is a marketplace app where users can sell luxury goods, including designer clothing and high-end tech. It works in a similar way to apps like Vinted and Vestiaire Collective in that users can either make an offer on an item or add the item straight to their bag and proceed to checkout. The app also allows users to rate and review sellers, favourite items, and accept/reject offers on items they are selling. 
+
+For this joint project on our General Assembly Software Engineering Bootcamp, Tony Rodriguez and I worked together via Zoom to design and build a RESTful API that was capable of handling the complex functionality of a resale platform. We each took ownership of different features of the app and implemented additional routes and schemas which presented several challenges during the build. Overall, we managed to deliver a robust and secure API by the project deadline. 
+
+The API can be accessed here: https://re-lux-marketplace-api.netlify.app/
+
+### Brief
+
+
+Our brief was to build a MongoDB/Express/React/Node.js application with full CRUD that met the following criteria: 
+
+- Backend built with Express.js and Node.js
+- MongoDB used as a database management system
+- JWT token-based authentication to sign up, sign in, and sign out users
+- Authorization implemented across frontend and backend to esnure guest users are not able to create, update, or delete data
+- At least two data entities in addition to the User model (one must have a relationship with the User model)
+- Full CRUD functionality
+- Public APIs that require secret keys must be access from the backend only
+
+## Installation
+
+For the backend, clone this repository and install the following packages:
+
+For user authentication: 
+
 ```bash
-git clone https://github.com/TonyRod116/Re-Lux-backend.git
-cd Re-Lux-backend
+npm install bcrypt
+npm install jsonwebtoken
 ```
 
-2. Install dependencies:
+For environment variables:
+
 ```bash
-npm install
+npm install dotenv
 ```
 
-3. Create a `.env` file in the root directory with the following variables:
-```env
-MONGODB_URI=your_mongodb_connection_string
-TOKEN_SECRET=your_jwt_secret_key
-PORT=3000
-```
+For the payment gateway:
 
-4. Start the development server:
 ```bash
-npm run dev
+npm install stripe
 ```
 
-The server will run on `http://localhost:3000`
+For HTTP requests: 
 
-## Timeframe & Working Team
-
-This project was completed as a **pair programming** collaboration with **Katie** ([KatieHill-Fr-Gr](https://github.com/KatieHill-Fr-Gr)) during a 1-week sprint from Friday to Friday, including weekend work. We worked together to plan, design, and implement both the backend API and frontend, collaborating on all aspects of the project.
-
-## Technologies Used
-
-### Back End
-- **Node.js** - Runtime environment
-- **Express.js** - Web application framework
-- **MongoDB** - NoSQL database
-- **Mongoose** - MongoDB object modeling
-- **JWT (JSON Web Tokens)** - Authentication
-- **bcrypt** - Password hashing
-- **Morgan** - HTTP request logger
-- **CORS** - Cross-origin resource sharing
-- **dotenv** - Environment variable management
-
-### Development Tools
-- **Nodemon** - Development server with auto-reload
-- **Git** - Version control
-- **Netlify** - Deployment platform
-
-## Brief
-
-The project brief was to create a luxury fashion marketplace platform where users can:
-- Register and authenticate securely
-- List luxury fashion items for sale
-- Browse and search through available items
-- Make offers on items
-- Add items to favorites
-- Leave reviews for other users
-- Manage their profile and listings
-
-The backend needed to provide a secure, scalable API that could handle user authentication, data persistence, and business logic for the marketplace functionality.
-
-## Planning
-
-### Initial Architecture Planning
-We started by designing the database schema and API structure. I created an Entity Relationship Diagram (ERD) to plan the data models:
-
-- **User Model**: Handles authentication, profile information, and user relationships
-- **Item Model**: Manages product listings with categories, pricing, and offer system
-- **Review Model**: Enables user feedback and rating system
-- **Favorite Model**: Tracks user's favorite items
-
-### API Endpoint Planning
-I planned the REST API structure with clear separation of concerns:
-- `/api/auth` - User authentication (signup/signin)
-- `/users` - User profile management
-- `/items` - Item CRUD operations and marketplace functionality
-- `/reviews` - User review system
-- `/favorites` - User favorites management
-
-### Security Planning
-- JWT-based authentication system
-- Password hashing with bcrypt
-- Protected routes for sensitive operations
-- Input validation and error handling
-
-## Build/Code Process
-
-### 1. Project Setup and Dependencies
-I started by setting up the Express server with essential middleware and configuring the MongoDB connection:
-
-```javascript
-// server.js - Main server configuration
-import express from 'express'
-import 'dotenv/config'
-import morgan from 'morgan'
-import mongoose from 'mongoose'
-import cors from 'cors'
-
-const app = express()
-const port = process.env.PORT || 3000
-
-app.use(express.json())
-app.use(morgan('dev'))
-app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:5174'],
-  credentials: true
-}))
+```bash
+npm install cors
+npm install morgan
+npm install serverless-http
 ```
 
-### 2. Database Models Implementation
-I created comprehensive Mongoose schemas with proper validation and relationships:
 
-```javascript
-// models/item.js - Item schema with offers system
-const itemSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: ['Please provide a title.', true],
-  },
-  type: {
-    type: String,
-    enum: ["handbag", "shoes", "dress", "jacket", "trousers", "pants", "watch", "jewelry", "coat", "skirt", "suit", "shirt", "blouse", "sweater", "jumper", "scarf", "belt", "sunglasses", "wallet", "purse", "clutch", "smart watch", "smart glasses", "fitness tracker", "smart ring", "wireless earbuds", "noise-canceling headphones", "smartphone", "tablet", "latop", "smart speaker", "VR headset", "candle", "fragrance", "vase", "side table", "candle holder", "tray", "lamp", "trunk", "towel", "bathrobe", "rug", "soft furnishing", "coffee table"],
-    required: ['Please provide a type.', true],
-  },
-  price: {
-    type: Number,
-    min: 1,
-    required: ['Please provide a minimum price.', true],
-  },
-  offers: [{
-    buyer: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    amount: {
-      type: Number,
-      min: 10,
-      required: true
-    },
-    status: {
-      type: String,
-      enum: ['pending', 'accepted', 'rejected'],
-      default: 'pending'
-    }
-  }]
-}, {
-  timestamps: true 
-})
-```
+## Planning 
 
-### 3. Authentication System
-I implemented a secure JWT-based authentication system with password hashing:
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-plain-wordmark.svg" 
+	alt="Trello" width="80" height="60" />
 
-```javascript
-// controllers/users.js - User authentication
-router.post('/sign-up', async (req, res, next) => {
-  try {
-    const { username, email, password, passwordConfirmation} = req.body
 
-    // Check if username already exists
-    const existingUsername = await User.findOne({ username })
-    if (existingUsername) {
-      return res.status(400).json({ message: 'Username already exists' })
-    }
+#### 1) Routing
 
-    // Check if email already exists
-    const existingEmail = await User.findOne({ email })
-    if (existingEmail) {
-      return res.status(400).json({ message: 'Email already exists' })
-    }
+We started by identifying all the endpoints for the user pages and also the items or products for sale:
 
-    // password confirmation
-    if (password !== passwordConfirmation) {
-      throw new InvalidDataError('Passwords do not match.', 'password')
-    }
+<img width="1008" height="496" alt="Re-Lux_RoutingTables" src="https://github.com/user-attachments/assets/9dedd657-d646-49ee-aeae-432d3c474f21" />
 
-    // create user
-    const newUser = await User.create({ username, email, password })
 
-    // JWT user info token
-    const token = generateToken(newUser)
+#### 2) Data Relationships
 
-    return res.status(201).json({token:token})
-  } catch (error) {
-    next(error)
-  }
-})
-```
+We also decided on the basic Mongoose schemas we would use and mapped the relationships using dbdiagram.io: 
 
-### 4. Item Management System
-I built a comprehensive item management system with favorites and offers functionality:
 
-```javascript
-// controllers/items.js - Items with favorites integration
-router.get('/with-favorites', verifyToken, async (req, res, next) => {
-  try {
-    const userId = req.user._id
-    
-    // Get all items with seller info
-    const items = await Item.find()
-      .populate('seller', 'username')
-      .populate('offers.buyer', 'username')
-    
-    // Get user's favorites
-    const userFavorites = await Favorite.find({ userId })
-    const favoriteItemIds = userFavorites.map(fav => fav.itemId.toString())
-    
-    // Add isFavorited field to each item
-    const itemsWithFavorites = items.map(item => ({
-      ...item.toObject(),
-      isFavorited: favoriteItemIds.includes(item._id.toString())
-    }))
-    
-    res.json(itemsWithFavorites)
-  } catch (error) {
-    next(error)
-  }
-})
-```
+<img width="807" height="752" alt="Re-Lux_ERD" src="https://github.com/user-attachments/assets/7fbaae21-f1d2-4f66-a6cc-91934eac6376" />
 
-### 5. Review System
-I implemented a user review system with validation and aggregation:
 
-```javascript
-// controllers/reviews.js - Review creation and management
-router.post('/', verifyToken, async (req, res, next) => {
-  try {
-    const { target_user_id, rating, description } = req.body
-    const user_id = req.user._id
+#### 3) Project Management
 
-    // Validate input
-    if (!target_user_id || !rating || rating < 1 || rating > 5) {
-      return res.status(400).json({ 
-        message: 'Invalid input. Rating must be between 1-5 and target_user_id is required.' 
-      })
-    }
+Finally, I created a Trello board and added the reference materials, user stories, tasks to be completed throughout the week, and our stretch goals: 
 
-    // Check if user is trying to review themselves
-    if (user_id.toString() === target_user_id) {
-      return res.status(400).json({ 
-        message: 'You cannot review yourself.' 
-      })
-    }
+<img width="1426" height="760" alt="Re-Lux_TrelloBoard" src="https://github.com/user-attachments/assets/7a91dae9-f281-4c3a-bb68-8dca80824cb5" />
 
-    // Check if user has already reviewed this target user
-    const existingReview = await Review.findOne({
-      user_id: user_id,
-      target_user_id: target_user_id
-    })
 
-    if (existingReview) {
-      return res.status(400).json({ 
-        message: 'You have already reviewed this user.' 
-      })
-    }
+## Build
 
-    // Create the review
-    const review = await Review.create({
-      user_id,
-      target_user_id,
-      rating,
-      description: description || ''
-    })
+We developed the initial routes, Mongoose schemas (User and Item), user authentication, and custom error-handling together. 
 
-    res.status(201).json({
-      message: 'Review created successfully',
-      review
-    })
-  } catch (error) {
-    next(error)
-  }
-})
-```
+#### 1) User Authentication
 
-### 6. Middleware and Error Handling
-I created custom middleware for authentication and comprehensive error handling:
+Following best practices, we implemented user authentication first before building the CRUD operations:
 
-```javascript
-// middleware/verifyToken.js - JWT verification
-const verifyToken = async (req, res, next) => {
-  try {
-    const authHeader = req.headers.authorization
-    if (!authHeader) throw new UnauthorizedError('No authorization header provided')
+- Created the /auth routes
+- Developed the User model
+- Implemented JWT-based authentication
+- Added custom verifyToken middleware to check for a valid token
 
-    const token = authHeader.split(' ')[1]
-    if (!token) throw new UnauthorizedError('No token provided')
+<img width="630" height="455" alt="Re-Lux_verifyToken" src="https://github.com/user-attachments/assets/fb875612-9275-4b9f-bf41-69e52875d528" />
 
-    const payload = jwt.verify(token, process.env.TOKEN_SECRET)
-    const foundUser = await User.findById(payload.user._id)
-    req.user = foundUser
 
-    next()
-  } catch (error) {
-    next(error)
-  }
-}
-```
+#### 2) Item Listings
 
-## Challenges
+We implemented full CRUD operations for the items listings: 
 
-### 1. JWT Token Implementation
-**Challenge**: Implementing secure JWT authentication with proper token verification and user session management.
+- Index (basic list view)
+- Show (detail view)
+- Create (new item form)
+- Update (edit item form)
+- Delete
 
-**Solution**: I created a robust middleware system that verifies tokens, extracts user information, and maintains secure user sessions across protected routes.
 
-### 2. Complex Data Relationships
-**Challenge**: Managing complex relationships between users, items, offers, and favorites while maintaining data consistency.
+#### 3) Error Handling
 
-**Solution**: I designed a flexible schema structure with proper references and implemented aggregation queries to efficiently retrieve related data.
+To provide comprehensive error handling, we created a helper file errors.js using JavaScript classes and an errorHandler middleware to manage server errors:
 
-### 3. Input Validation and Error Handling
-**Challenge**: Creating a comprehensive error handling system that provides meaningful feedback to the frontend.
 
-**Solution**: I implemented custom error classes and middleware that catch and format errors appropriately, ensuring consistent API responses.
+<img width="646" height="480" alt="Re-Lux_errorhandling" src="https://github.com/user-attachments/assets/b2df3daf-7140-4583-aba3-dcc8574b5aa5" />
 
-### 4. Database Query Optimization
-**Challenge**: Optimizing database queries for items with favorites and offers to avoid N+1 query problems.
 
-**Solution**: I used Mongoose's populate functionality and aggregation pipelines to efficiently retrieve related data in single queries.
+#### 4) Stripe Integration 
+
+I took ownership of the payment gateway and implemented this on both the frontend and backend: 
+
+- Added the STRIPE_SECRET_KEY to the .env file
+- Created a /purchase-intent route 
+- Calculated the order total server-side (in addition to frontend calculation) for security
+- Created the paymentIntent which is then sent to Stripe for processing
+
+<img width="606" height="256" alt="Re-Lux_StripeTotalCalculation" src="https://github.com/user-attachments/assets/a76c60b4-0f89-41c5-90ec-541ebd615b4b" />
+
+
+<img width="637" height="158" alt="Re-Lux_StripePaymentIntent" src="https://github.com/user-attachments/assets/9c424922-6f29-4a40-aa9a-7423a28180b0" />
+
+
+### Challenges
+
 
 ## Wins
 
-### 1. Robust Authentication System
-I'm particularly proud of the secure authentication system I built, which includes proper password hashing, JWT token management, and protected route middleware.
-
-### 2. Efficient Data Architecture
-The database schema design efficiently handles complex relationships between users, items, offers, and favorites while maintaining good performance.
-
-### 3. Comprehensive API Design
-The REST API provides a clean, intuitive interface for all marketplace functionality with proper HTTP status codes and error handling.
-
-### 4. Clean Code Structure
-The codebase follows good practices with clear separation of concerns, reusable middleware, and consistent error handling patterns.
-
-## Key Learnings/Takeaways
-
-### Technical Skills Development
-- **Express.js**: I gained deep understanding of Express middleware, routing, and error handling patterns
-- **MongoDB/Mongoose**: I learned advanced querying techniques, aggregation pipelines, and schema design best practices
-- **JWT Authentication**: I mastered implementing secure authentication systems with proper token management
-- **API Design**: I developed strong skills in RESTful API design with proper HTTP methods and status codes
-
-### Engineering Process Growth
-- **Pair Programming**: Working with Katie ([KatieHill-Fr-Gr](https://github.com/KatieHill-Fr-Gr)) taught me effective collaboration techniques and code review practices
-- **Project Planning**: I learned the importance of thorough planning before coding, especially for complex data relationships
-- **Error Handling**: I developed a systematic approach to error handling that improves user experience and debugging
-- **Database Design**: I gained experience in designing efficient database schemas that balance flexibility with performance
 
 ## Bugs
 
-Currently, there are no known bugs in the backend system. All endpoints have been tested and are functioning as expected.
+
+## Key Learnings
+
 
 ## Future Improvements
 
-### 1. Enhanced Search and Filtering
-- Implement advanced search with text indexing
-- Add filtering by price range, location, and item type
-- Implement sorting options for search results
 
-### 2. Real-time Features
-- Add WebSocket support for real-time notifications
-- Implement live chat between buyers and sellers
-- Add real-time updates for offer status changes
 
-### 3. Performance Optimizations
-- Implement Redis caching for frequently accessed data
-- Add database indexing for better query performance
-- Implement pagination for large datasets
 
-### 4. Additional Features
-- Add image upload and management system
-- Implement a messaging system between users
-- Add analytics and reporting features for sellers
-- Implement a recommendation system based on user preferences
-- **Re-New Service**: Partner with local dry cleaners to offer item renewal service where users can pay a small fee (based on item type - coat, shirt, etc.) to have items professionally cleaned before shipping, essentially "renewing" the clothing
-- **Custom Auction System**: Implement an in-house auction platform currently in development, allowing users to bid on luxury items with real-time bidding functionality
 
----
-
-*This README reflects my individual contributions to the Re-Lux backend project, completed in collaboration with Katie during our pair programming sprint.*
 
 
