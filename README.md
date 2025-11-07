@@ -234,7 +234,13 @@ router.post('/purchase-intent', async (req, res, next) => {
         }
 ```
 
-<img width="637" height="158" alt="Re-Lux_StripePaymentIntent" src="https://github.com/user-attachments/assets/9c424922-6f29-4a40-aa9a-7423a28180b0" />
+```
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: serverAmountInCents,
+            currency: 'eur',
+            automatic_payment_methods: { enabled: true },
+        })
+```
 
 
 ### Challenges
@@ -243,11 +249,29 @@ router.post('/purchase-intent', async (req, res, next) => {
 
 When working on the category pages on the frontend, I realised that I needed to manage the product types from the backend. I defined the types directly in the Mongoose schema using an `enum`: 
 
-<img width="641" height="365" alt="Re-Lux_itemtypes" src="https://github.com/user-attachments/assets/ae8fbae1-891c-46ce-97c5-35b23e2c6a7b" />
+```
+  type: {
+    type: String,
+    enum: ["handbag", "shoes", "dress", "jacket", "trousers", "pants", "watch", "jewelry", "coat", "skirt", "suit", "shirt", "blouse", "sweater", "jumper", "scarf", "belt", "sunglasses", "wallet", "purse", "clutch",
+      "smart watch", "smart glasses", "fitness tracker", "smart ring", "wireless earbuds", "noise-canceling headphones", "smartphone", "tablet", "latop", "smart speaker", "VR headset",
+    "candle", "fragrance", "vase", "side table", "candle holder", "tray", "lamp", "trunk", "towel", "bathrobe", "rug", "soft furnishing", "coffee table"],
+    required: ['Please provide a type.', true],
+  }
+```
 
 To populate the dropdown lists in the create and edit form components, I implemented a separate `/types` route that uses enumValues to dynamically retrieve the list of types from the schema: 
 
-<img width="639" height="203" alt="Re-Lux_itemtypesroute" src="https://github.com/user-attachments/assets/1807a0b5-6a76-423f-8610-36b5ec319c91" />
+```
+// * Types 
+router.get("/types", async (req, res, next) => {
+  try {
+    const enumValues = Item.schema.path("type").enumValues
+    res.json(enumValues)
+  } catch (error) {
+    next(error)
+  }
+})
+```
 
 This solution meant there was no need to hardcode the types on the frontend and ensured consistency across the app. 
 
