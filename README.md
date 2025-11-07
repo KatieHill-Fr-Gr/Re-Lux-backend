@@ -120,8 +120,30 @@ Following best practices, we implemented user authentication first before buildi
 - Added custom verifyToken middleware to protect authenticated routes
 - Stored secret keys securely in the .env file
 
-<img width="630" height="455" alt="Re-Lux_verifyToken" src="https://github.com/user-attachments/assets/fb875612-9275-4b9f-bf41-69e52875d528" />
+```
+const verifyToken = async (req, res, next) => {
+  try {
 
+const authHeader = req.headers.authorization
+
+if (!authHeader) throw new UnauthorizedError('No authorization header provided')
+
+  const token = authHeader.split(' ')[1]
+  if (!token) throw new UnauthorizedError('No token provided')
+
+  const payload = jwt.verify(token, process.env.TOKEN_SECRET)
+
+const foundUser = await User.findById(payload.user._id)
+
+req.user = foundUser
+
+next()
+
+  } catch (error) {
+    next(error)
+  }
+}
+```
 
 #### 2) Item Listings
 
@@ -139,8 +161,43 @@ We then implemented full CRUD operations for the items listings:
 To standardise error handling, we created a helper file with custom error classes (using JavaScript’s built-in Error class) and an errorHandler middleware function to manage server errors:
 
 
-<img width="646" height="480" alt="Re-Lux_errorhandling" src="https://github.com/user-attachments/assets/b2df3daf-7140-4583-aba3-dcc8574b5aa5" />
+```
+export class InvalidDataError extends Error {
+  constructor(message, field) {
+    super(message)
+    this.name = 'InvalidDataError'
+    this.isCustomError = true
+    this.status = 400
+    this.field = field
+    this.response = { [field]: message }
+  }
+}
 
+export class NotFoundError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'NotFoundError'
+    this.status = 404
+  }
+}
+
+export class ValidationError extends Error {
+  constructor(message, field) {
+    super(message)
+    this.name = 'ValidationError'
+    this.status = 400
+    this.field = field
+  }
+}
+
+export class UnauthorizedError extends Error {
+  constructor(message) {
+    super(message)
+    this.name = 'UnauthorizedError'
+    this.status = 401
+  }
+}
+```
 
 #### 4) Stripe Integration 
 
@@ -151,8 +208,31 @@ I took ownership of the payment gateway and implemented this on both the fronten
 - Calculated the order total server-side (in addition to frontend calculation) for security
 - Created the paymentIntent which is then sent to Stripe for processing
 
-<img width="606" height="256" alt="Re-Lux_StripeTotalCalculation" src="https://github.com/user-attachments/assets/a76c60b4-0f89-41c5-90ec-541ebd615b4b" />
+```
+router.post('/purchase-intent', async (req, res, next) => {
 
+    const { amount, cartItems, currency = 'eur' } = req.body;
+
+    try {
+
+        if (!cartItems || cartItems.length === 0) {
+            return res.status(400).json({ error: 'Cart is empty' });
+        }
+
+        const serverTotal = cartItems.reduce((total, item) => {
+            return total + item.price;
+        }, 0);
+
+        const serverAmountInCents = Math.round(serverTotal * 100);
+
+        if (amount !== serverAmountInCents) {
+            return res.status(400).json({
+                error: 'Amount mismatch between frontend and backend',
+                expected: serverAmountInCents,
+                received: amount
+            });
+        }
+```
 
 <img width="637" height="158" alt="Re-Lux_StripePaymentIntent" src="https://github.com/user-attachments/assets/9c424922-6f29-4a40-aa9a-7423a28180b0" />
 
